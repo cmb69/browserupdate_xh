@@ -158,6 +158,43 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests that the script is written to $bjs with test mode disabled when
+     * not logged in.
+     *
+     * @return void
+     *
+     * @global string (X)HTML fragment to insert at the bottom of the body element.
+     * @global array  The configuration of the plugins.
+     */
+    public function testEmitScriptNotInTestModeInFrontEnd()
+    {
+        global $bjs, $plugin_cf;
+
+        $this->_defineConstant('XH_ADM', false);
+        $bjs = '';
+        $plugin_cf['browserupdate'] = array(
+            'version_explorer' => '',
+            'version_firefox' => '',
+            'version_opera' => '',
+            'version_safari' => '',
+            'version_chrome' => '',
+            'reminder' => '24',
+            'cms_language' => '',
+            'test' => 'true'
+        );
+        $subject = new Browserupdate_Controller();
+        $subject->dispatch();
+        $this->assertTag(
+            array(
+                'tag' => 'script',
+                'attributes' => array('type' => 'text/javascript'),
+                'content' => 'var $buoop = {"reminder":24,"l":false,"test":false};'
+            ),
+            $bjs
+        );
+    }
+
+    /**
      * Tests that the script is written to $bjs with custom browser versions.
      *
      * @return void
@@ -214,6 +251,23 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
             ),
             $hjs
         );
+    }
+
+    /**
+     * (Re)defines a constant.
+     *
+     * @param string $name  A name.
+     * @param string $value A value.
+     *
+     * @return void
+     */
+    private function _defineConstant($name, $value)
+    {
+        if (!defined($name)) {
+            define($name, $value);
+        } else {
+            runkit_constant_redefine($name, $value);
+        }
     }
 }
 

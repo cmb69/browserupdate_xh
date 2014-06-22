@@ -106,7 +106,7 @@ EOT;
         $config = array(
             'reminder' => (int) $pcf['reminder'],
             'l' => $pcf['cms_language'] ? $sl : false,
-            'test' => (bool) $pcf['test']
+            'test' => XH_ADM && (bool) $pcf['test']
         );
         $versions = $this->_getBrowserVersions();
         if ($versions) {
