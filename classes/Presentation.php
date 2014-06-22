@@ -36,6 +36,9 @@ class Browserupdate_Controller
     {
         global $browserupdate;
 
+        if (XH_ADM && function_exists('XH_registerStandardPluginMenuItems')) {
+            XH_registerStandardPluginMenuItems(false);
+        }
         $this->_emitScript();
         if (XH_ADM && isset($browserupdate) && $browserupdate == 'true') {
             $this->_handleAdministration();
