@@ -32,6 +32,13 @@ require_once $pth['folder']['plugin_classes'] . 'Presentation.php';
  */
 define('BROWSERUPDATE_VERSION', '@BROWSERUPDATE_VERSION@');
 
+if (!defined('XH_ADM')) {
+    /**
+     * Whether we're in admin mode.
+     */
+    define('XH_ADM', $adm);
+}
+
 /**
  * The plugin controller.
  */
