@@ -44,7 +44,150 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         $this->assertTag(
             array(
                 'tag' => 'script',
-                'attributes' => array('type' => 'text/javascript')
+                'attributes' => array('type' => 'text/javascript'),
+                'content' => 'var $buoop = {"reminder":0,"l":false,"test":false};'
+            ),
+            $bjs
+        );
+    }
+
+    /**
+     * Tests that the script is written to $bjs configured with the CMS language.
+     *
+     * @return void
+     *
+     * @global string (X)HTML fragment to insert at the bottom of the body element.
+     * @global array  The configuration of the plugins.
+     */
+    public function testEmitScriptWithCMSLanguage()
+    {
+        global $bjs, $plugin_cf, $sl;
+
+        $bjs = '';
+        $plugin_cf['browserupdate'] = array(
+            'version_explorer' => '',
+            'version_firefox' => '',
+            'version_opera' => '',
+            'version_safari' => '',
+            'version_chrome' => '',
+            'reminder' => '42',
+            'cms_language' => 'true',
+            'test' => ''
+        );
+        $sl = 'en';
+        $subject = new Browserupdate_Controller();
+        $subject->dispatch();
+        $this->assertTag(
+            array(
+                'tag' => 'script',
+                'attributes' => array('type' => 'text/javascript'),
+                'content' => 'var $buoop = {"reminder":42,"l":"en","test":false};'
+            ),
+            $bjs
+        );
+    }
+
+    /**
+     * Tests that the script is written to $bjs with a custom reminder time.
+     *
+     * @return void
+     *
+     * @global string (X)HTML fragment to insert at the bottom of the body element.
+     * @global array  The configuration of the plugins.
+     */
+    public function testEmitScriptWithCustomReminder()
+    {
+        global $bjs, $plugin_cf;
+
+        $bjs = '';
+        $plugin_cf['browserupdate'] = array(
+            'version_explorer' => '',
+            'version_firefox' => '',
+            'version_opera' => '',
+            'version_safari' => '',
+            'version_chrome' => '',
+            'reminder' => '42',
+            'cms_language' => '',
+            'test' => ''
+        );
+        $subject = new Browserupdate_Controller();
+        $subject->dispatch();
+        $this->assertTag(
+            array(
+                'tag' => 'script',
+                'attributes' => array('type' => 'text/javascript'),
+                'content' => 'var $buoop = {"reminder":42,"l":false,"test":false};'
+            ),
+            $bjs
+        );
+    }
+
+    /**
+     * Tests that the script is written to $bjs with test mode enabled.
+     *
+     * @return void
+     *
+     * @global string (X)HTML fragment to insert at the bottom of the body element.
+     * @global array  The configuration of the plugins.
+     */
+    public function testEmitScriptInTestMode()
+    {
+        global $bjs, $plugin_cf;
+
+        $bjs = '';
+        $plugin_cf['browserupdate'] = array(
+            'version_explorer' => '',
+            'version_firefox' => '',
+            'version_opera' => '',
+            'version_safari' => '',
+            'version_chrome' => '',
+            'reminder' => '24',
+            'cms_language' => '',
+            'test' => 'true'
+        );
+        $subject = new Browserupdate_Controller();
+        $subject->dispatch();
+        $this->assertTag(
+            array(
+                'tag' => 'script',
+                'attributes' => array('type' => 'text/javascript'),
+                'content' => 'var $buoop = {"reminder":24,"l":false,"test":true};'
+            ),
+            $bjs
+        );
+    }
+
+    /**
+     * Tests that the script is written to $bjs with custom browser versions.
+     *
+     * @return void
+     *
+     * @global string (X)HTML fragment to insert at the bottom of the body element.
+     * @global array  The configuration of the plugins.
+     */
+    public function testEmitScriptWithCustomVersions()
+    {
+        global $bjs, $plugin_cf;
+
+        $bjs = '';
+        $plugin_cf['browserupdate'] = array(
+            'version_explorer' => '9',
+            'version_firefox' => '15',
+            'version_opera' => '12.1',
+            'version_safari' => '5.1',
+            'version_chrome' => '',
+            'reminder' => '42',
+            'cms_language' => '',
+            'test' => ''
+        );
+        $subject = new Browserupdate_Controller();
+        $subject->dispatch();
+        $this->assertTag(
+            array(
+                'tag' => 'script',
+                'attributes' => array('type' => 'text/javascript'),
+                'content' => 'var $buoop = {"reminder":42,"l":false,'
+                    . '"test":false,"vs":{"i":"9","f":"15","o":"12.1","s":"5.1"}};'
             ),
             $bjs
         );

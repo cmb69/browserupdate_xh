@@ -68,9 +68,10 @@ class Browserupdate_Controller
      */
     private function _renderScript()
     {
+        $config = $this->_getConfig();
         return <<<EOT
 <script type="text/javascript">/* <![CDATA[ */
-var \$buoop = {};
+var \$buoop = $config;
 \$buoop.ol = window.onload;
 window.onload = function () {
     try {
@@ -85,6 +86,58 @@ window.onload = function () {
 }
 /* ]]> */</script>
 EOT;
+    }
+
+    /**
+     * Returns the JSON encoded script configuration.
+     *
+     * @return string
+     *
+     * @global string The current language.
+     * @global array  The configuration of the plugins.     *
+     *
+     * @todo json_encode vs. XH_encodeJson
+     */
+    private function _getConfig()
+    {
+        global $sl, $plugin_cf;
+
+        $pcf = $plugin_cf['browserupdate'];
+        $config = array(
+            'reminder' => (int) $pcf['reminder'],
+            'l' => $pcf['cms_language'] ? $sl : false,
+            'test' => (bool) $pcf['test']
+        );
+        $versions = $this->_getBrowserVersions();
+        if ($versions) {
+            $config['vs'] = $versions;
+        }
+        return json_encode($config);
+    }
+
+    /**
+     * Returns a map of out-dated browser versions.
+     *
+     * @return array
+     *
+     * @global array The configuration of the plugins.
+     */
+    private function _getBrowserVersions()
+    {
+        global $plugin_cf;
+
+        $versions = array();
+        $browsers = array(
+            'i' => 'explorer', 'f' => 'firefox', 'o' => 'opera', 's' => 'safari',
+            'c' => 'chrome'
+        );
+        foreach ($browsers as $abbrev => $name) {
+            $version = $plugin_cf['browserupdate']['version_' . $name];
+            if ($version) {
+                $versions[$abbrev] = $version;
+            }
+        }
+        return $versions;
     }
 
     /**
