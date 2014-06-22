@@ -114,7 +114,7 @@
             </fileset>
         </move>
         <delete dir="export"/>
-        <!--<copy file="dist/config/config.php" tofile="dist/config/defaultconfig.php"/>-->
+        <copy file="dist/config/config.php" tofile="dist/config/defaultconfig.php"/>
         <copy file="dist/languages/en.php" tofile="dist/languages/default.php"/>
         <zip destfile="Browserupdate_XH-${version}.zip" basedir="dist" prefix="browserupdate/"/>
         <delete dir="dist"/>
