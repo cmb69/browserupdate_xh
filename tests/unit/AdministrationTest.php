@@ -41,7 +41,7 @@ class AdministrationTest extends PHPUnit_Framework_TestCase
     {
         global $browserupdate, $admin, $action;
 
-        $this->_defineConstant('XH_ADM', true);
+        $this->defineConstant('XH_ADM', true);
         $browserupdate = 'true';
         $admin = 'plugin_stylesheet';
         $action = 'plugin_text';
@@ -69,7 +69,7 @@ class AdministrationTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    private function _defineConstant($name, $value)
+    protected function defineConstant($name, $value)
     {
         if (!defined($name)) {
             define($name, $value);

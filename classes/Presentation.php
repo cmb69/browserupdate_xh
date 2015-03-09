@@ -38,9 +38,9 @@ class Browserupdate_Controller
         if (XH_ADM && function_exists('XH_registerStandardPluginMenuItems')) {
             XH_registerStandardPluginMenuItems(false);
         }
-        $this->_emitScript();
+        $this->emitScript();
         if (XH_ADM && isset($browserupdate) && $browserupdate == 'true') {
-            $this->_handleAdministration();
+            $this->handleAdministration();
         }
     }
 
@@ -52,14 +52,14 @@ class Browserupdate_Controller
      * @global string (X)HTML fragment to insert in the head element.
      * @global string (X)HTML fragment to insert at the bottom of the body element.
      */
-    private function _emitScript()
+    protected function emitScript()
     {
         global $hjs, $bjs;
 
         if (isset($bjs)) {
-            $bjs .= $this->_renderScript();
+            $bjs .= $this->renderScript();
         } else {
-            $hjs .= $this->_renderScript();
+            $hjs .= $this->renderScript();
         }
     }
 
@@ -68,9 +68,9 @@ class Browserupdate_Controller
      *
      * @return string (X)HTML.
      */
-    private function _renderScript()
+    protected function renderScript()
     {
-        $config = $this->_getConfig();
+        $config = $this->getConfig();
         return <<<EOT
 <script type="text/javascript">/* <![CDATA[ */
 var \$buoop = $config;
@@ -100,7 +100,7 @@ EOT;
      *
      * @todo json_encode vs. XH_encodeJson
      */
-    private function _getConfig()
+    protected function getConfig()
     {
         global $sl, $plugin_cf;
 
@@ -110,7 +110,7 @@ EOT;
             'l' => $pcf['cms_language'] ? $sl : false,
             'test' => XH_ADM && (bool) $pcf['test']
         );
-        $versions = $this->_getBrowserVersions();
+        $versions = $this->getBrowserVersions();
         if ($versions) {
             $config['vs'] = $versions;
         }
@@ -124,7 +124,7 @@ EOT;
      *
      * @global array The configuration of the plugins.
      */
-    private function _getBrowserVersions()
+    protected function getBrowserVersions()
     {
         global $plugin_cf;
 
@@ -151,14 +151,14 @@ EOT;
      * @global string The value of the <var>action</var> GP parameter.
      * @global string (X)HTML fragment to insert in the contents area.
      */
-    private function _handleAdministration()
+    protected function handleAdministration()
     {
         global $admin, $action, $o;
 
         $o .= print_plugin_admin('off');
         switch ($admin) {
         case '':
-            $o .= $this->_renderInfo();
+            $o .= $this->renderInfo();
             break;
         default:
             $o .= plugin_admin_common($action, $admin, 'browserupdate');
@@ -170,12 +170,12 @@ EOT;
      *
      * @return string (X)HTML.
      */
-    private function _renderInfo()
+    protected function renderInfo()
     {
         return '<h1>Browserupdate</h1>'
-            . $this->_renderIcon()
+            . $this->renderIcon()
             . '<p>Version: ' . BROWSERUPDATE_VERSION . '</p>'
-            . $this->_renderCopyright() . $this->_renderLicense();
+            . $this->renderCopyright() . $this->renderLicense();
     }
 
     /**
@@ -186,7 +186,7 @@ EOT;
      * @global array The paths of system files and folders.
      * @global array The localization of the plugins.
      */
-    private function _renderIcon()
+    protected function renderIcon()
     {
         global $pth, $plugin_tx;
 
@@ -202,7 +202,7 @@ EOT;
      *
      * @return (X)HTML.
      */
-    private function _renderCopyright()
+    protected function renderCopyright()
     {
         return <<<EOT
 <p>Copyright &copy; 2014-2015
@@ -216,7 +216,7 @@ EOT;
      *
      * @return (X)HTML.
      */
-    private function _renderLicense()
+    protected function renderLicense()
     {
         return <<<EOT
 <p class="browserupdate_license">This program is free software: you can

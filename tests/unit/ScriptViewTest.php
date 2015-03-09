@@ -181,7 +181,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
     {
         global $bjs, $plugin_cf;
 
-        $this->_defineConstant('XH_ADM', false);
+        $this->defineConstant('XH_ADM', false);
         $bjs = '';
         $plugin_cf['browserupdate'] = array(
             'version_explorer' => '',
@@ -272,7 +272,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    private function _defineConstant($name, $value)
+    protected function defineConstant($name, $value)
     {
         if (!defined($name)) {
             define($name, $value);
