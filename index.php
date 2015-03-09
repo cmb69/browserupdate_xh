@@ -22,11 +22,6 @@ if (!defined('CMSIMPLE_XH_VERSION')) {
 }
 
 /**
- * The presentation layer.
- */
-require_once $pth['folder']['plugin_classes'] . 'Presentation.php';
-
-/**
  * The plugin version.
  */
 define('BROWSERUPDATE_VERSION', '@BROWSERUPDATE_VERSION@');

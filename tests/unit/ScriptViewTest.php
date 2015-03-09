@@ -13,8 +13,6 @@
  * @link      http://3-magi.net/?CMSimple_XH/Browserupdate_XH
  */
 
-require_once './classes/Presentation.php';
-
 /**
  * Testing the script view.
  *
