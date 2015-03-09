@@ -13,14 +13,6 @@
  * @link      http://3-magi.net/?CMSimple_XH/Browserupdate_XH
  */
 
-/*
- * Prevent direct access.
- */
-if (!defined('CMSIMPLE_XH_VERSION')) {
-    header('HTTP/1.0 403 Forbidden');
-    exit;
-}
-
 /**
  * The plugin version.
  */
