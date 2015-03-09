@@ -1,7 +1,7 @@
 <?php
 
 /**
- * main ;)
+ * The plugin entry point.
  *
  * PHP version 5
  *
