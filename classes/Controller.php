@@ -28,23 +28,17 @@ class Browserupdate_Controller
      * Dispatches according to the request.
      *
      * @return void
-     *
-     * @global string Whether the plugin's administration is requested.
      */
     public function dispatch()
     {
-        global $browserupdate;
-
-        if (defined('XH_ADM') && XH_ADM
-            && function_exists('XH_registerStandardPluginMenuItems')
-        ) {
-            XH_registerStandardPluginMenuItems(false);
-        }
         $this->emitScript();
-        if (defined('XH_ADM') && XH_ADM
-            && isset($browserupdate) && $browserupdate == 'true'
-        ) {
-            $this->handleAdministration();
+        if (defined('XH_ADM') && XH_ADM) {
+            if (function_exists('XH_registerStandardPluginMenuItems')) {
+                XH_registerStandardPluginMenuItems(false);
+            }
+            if ($this->isAdministrationRequested()) {
+                $this->handleAdministration();
+            }
         }
     }
 
@@ -144,6 +138,22 @@ EOT;
             }
         }
         return $versions;
+    }
+
+    /**
+     * Returns whether the plugin administration is requested.
+     *
+     * @return bool
+     *
+     * @global string Whether the plugin's administration is requested.
+     */
+    protected function isAdministrationRequested()
+    {
+        global $browserupdate;
+
+        return function_exists('XH_wantsPluginAdministration')
+            && XH_wantsPluginAdministration('browserupdate')
+            || isset($browserupdate) && $browserupdate == 'true';
     }
 
     /**
