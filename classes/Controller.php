@@ -35,11 +35,15 @@ class Browserupdate_Controller
     {
         global $browserupdate;
 
-        if (XH_ADM && function_exists('XH_registerStandardPluginMenuItems')) {
+        if (defined('XH_ADM') && XH_ADM
+            && function_exists('XH_registerStandardPluginMenuItems')
+        ) {
             XH_registerStandardPluginMenuItems(false);
         }
         $this->emitScript();
-        if (XH_ADM && isset($browserupdate) && $browserupdate == 'true') {
+        if (defined('XH_ADM') && XH_ADM
+            && isset($browserupdate) && $browserupdate == 'true'
+        ) {
             $this->handleAdministration();
         }
     }
@@ -108,7 +112,7 @@ EOT;
         $config = array(
             'reminder' => (int) $pcf['reminder'],
             'l' => $pcf['cms_language'] ? $sl : false,
-            'test' => XH_ADM && (bool) $pcf['test']
+            'test' => defined('XH_ADM') && XH_ADM && (bool) $pcf['test']
         );
         $versions = $this->getBrowserVersions();
         if ($versions) {

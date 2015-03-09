@@ -26,13 +26,6 @@ if (!defined('CMSIMPLE_XH_VERSION')) {
  */
 define('BROWSERUPDATE_VERSION', '@BROWSERUPDATE_VERSION@');
 
-if (!defined('XH_ADM')) {
-    /**
-     * Whether we're in admin mode.
-     */
-    define('XH_ADM', $adm);
-}
-
 /**
  * The plugin controller.
  */
