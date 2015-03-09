@@ -61,6 +61,9 @@ class InfoViewTest extends PHPUnit_Framework_TestCase
             'browserupdate' => array('alt_icon' => 'Update')
         );
         $this->_subject = new Browserupdate_Controller();
+        new PHPUnit_Extensions_MockFunction(
+            'XH_registerStandardPluginMenuItems', $this->_subject
+        );
         $printPluginAdmin = new PHPUnit_Extensions_MockFunction(
             'print_plugin_admin', $this->_subject
         );
@@ -78,7 +81,7 @@ class InfoViewTest extends PHPUnit_Framework_TestCase
     {
         global $o;
 
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'h1',
                 'content' => 'Browserupdate'
@@ -98,7 +101,7 @@ class InfoViewTest extends PHPUnit_Framework_TestCase
     {
         global $o;
 
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'img',
                 'attributes' => array(
@@ -122,7 +125,7 @@ class InfoViewTest extends PHPUnit_Framework_TestCase
     {
         global $o;
 
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'p',
                 'content' => 'Version: ' . BROWSERUPDATE_VERSION
@@ -142,7 +145,7 @@ class InfoViewTest extends PHPUnit_Framework_TestCase
     {
         global $o;
 
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'p',
                 'content' => "Copyright \xC2\xA9 2014-2015",
@@ -170,7 +173,7 @@ class InfoViewTest extends PHPUnit_Framework_TestCase
     {
         global $o;
 
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'p',
                 'attributes' => array('class' => 'browserupdate_license'),

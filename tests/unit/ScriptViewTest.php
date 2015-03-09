@@ -27,6 +27,18 @@ require_once './classes/Presentation.php';
 class ScriptViewTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Sets up the test fixtures.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        new PHPUnit_Extensions_MockFunction(
+            'XH_registerStandardPluginMenuItems', null
+        );
+    }
+
+    /**
      * Tests that the script is written to $bjs.
      *
      * @return void
@@ -40,7 +52,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         $bjs = '';
         $subject = new Browserupdate_Controller();
         $subject->dispatch();
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'script',
                 'attributes' => array('type' => 'text/javascript'),
@@ -76,7 +88,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         $sl = 'en';
         $subject = new Browserupdate_Controller();
         $subject->dispatch();
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'script',
                 'attributes' => array('type' => 'text/javascript'),
@@ -111,7 +123,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         );
         $subject = new Browserupdate_Controller();
         $subject->dispatch();
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'script',
                 'attributes' => array('type' => 'text/javascript'),
@@ -146,7 +158,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         );
         $subject = new Browserupdate_Controller();
         $subject->dispatch();
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'script',
                 'attributes' => array('type' => 'text/javascript'),
@@ -183,7 +195,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         );
         $subject = new Browserupdate_Controller();
         $subject->dispatch();
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'script',
                 'attributes' => array('type' => 'text/javascript'),
@@ -218,7 +230,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         );
         $subject = new Browserupdate_Controller();
         $subject->dispatch();
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'script',
                 'attributes' => array('type' => 'text/javascript'),
@@ -243,7 +255,7 @@ class ScriptViewTest extends PHPUnit_Framework_TestCase
         $hjs = '';
         $subject = new Browserupdate_Controller();
         $subject->dispatch();
-        $this->assertTag(
+        @$this->assertTag(
             array(
                 'tag' => 'script',
                 'attributes' => array('type' => 'text/javascript')

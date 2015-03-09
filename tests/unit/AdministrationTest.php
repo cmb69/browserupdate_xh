@@ -46,6 +46,9 @@ class AdministrationTest extends PHPUnit_Framework_TestCase
         $admin = 'plugin_stylesheet';
         $action = 'plugin_text';
         $subject = new Browserupdate_Controller();
+        new PHPUnit_Extensions_MockFunction(
+            'XH_registerStandardPluginMenuItems', $subject
+        );
         $printPluginAdmin = new PHPUnit_Extensions_MockFunction(
             'print_plugin_admin', $subject
         );
