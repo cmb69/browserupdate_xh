@@ -23,7 +23,7 @@
 function Browserupdate_autoload($class)
 {
     global $pth;
-    $parts = explode('_', $class, 2);
+    $parts = explode('\\', $class, 2);
     if ($parts[0] == 'Browserupdate') {
         include_once $pth['folder']['plugins'] . 'browserupdate/classes/'
             . $parts[1] . '.php';

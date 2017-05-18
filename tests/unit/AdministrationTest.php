@@ -13,6 +13,11 @@
  * @link      http://3-magi.net/?CMSimple_XH/Browserupdate_XH
  */
 
+namespace Browserupdate;
+
+use PHPUnit_Framework_TestCase;
+use PHPUnit_Extensions_MockFunction;
+
 require_once './vendor/autoload.php';
 require_once '../../cmsimple/functions.php';
 require_once '../../cmsimple/adminfuncs.php';
@@ -46,7 +51,7 @@ class AdministrationTest extends PHPUnit_Framework_TestCase
         $browserupdate = 'true';
         $admin = 'plugin_stylesheet';
         $action = 'plugin_text';
-        $subject = new Browserupdate_Controller();
+        $subject = new Controller();
         new PHPUnit_Extensions_MockFunction(
             'XH_registerStandardPluginMenuItems', $subject
         );

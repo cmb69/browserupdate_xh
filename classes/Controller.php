@@ -13,6 +13,8 @@
  * @link      http://3-magi.net/?CMSimple_XH/Browserupdate_XH
  */
 
+namespace Browserupdate;
+
 /**
  * The controllers.
  *
@@ -22,7 +24,7 @@
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
  * @link     http://3-magi.net/?CMSimple_XH/Feedview_XH
  */
-class Browserupdate_Controller
+class Controller
 {
     /**
      * Dispatches according to the request.
