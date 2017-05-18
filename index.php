@@ -18,10 +18,6 @@
  */
 define('BROWSERUPDATE_VERSION', '@BROWSERUPDATE_VERSION@');
 
-/**
- * The plugin controller.
- */
-$_Browserupdate_controller = new Browserupdate\Controller();
-$_Browserupdate_controller->dispatch();
+(new Browserupdate\Controller)->dispatch();
 
 ?>
