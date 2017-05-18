@@ -19,17 +19,12 @@
  * along with Browserupdate_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @param string $class
- */
-function Browserupdate_autoload($class)
-{
+spl_autoload_register(function ($class) {
     global $pth;
+
     $parts = explode('\\', $class, 2);
     if ($parts[0] == 'Browserupdate') {
         include_once $pth['folder']['plugins'] . 'browserupdate/classes/'
             . $parts[1] . '.php';
     }
-}
-
-spl_autoload_register('Browserupdate_autoload');
+});
