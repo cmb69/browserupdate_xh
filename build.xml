@@ -72,6 +72,7 @@
                 <exclude name="composer.*"/>
                 <exclude name="coverage.xml"/>
                 <exclude name="phpcompatinfo.json"/>
+                <exclude name="README.md"/>
                 <exclude name="tests/**"/>
             </fileset>
         </move>
