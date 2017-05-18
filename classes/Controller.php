@@ -26,11 +26,9 @@ class Controller
     public function dispatch()
     {
         $this->emitScript();
-        if (defined('XH_ADM') && XH_ADM) {
-            if (function_exists('XH_registerStandardPluginMenuItems')) {
-                XH_registerStandardPluginMenuItems(false);
-            }
-            if ($this->isAdministrationRequested()) {
+        if (XH_ADM) {
+            XH_registerStandardPluginMenuItems(false);
+            if (XH_wantsPluginAdministration('browserupdate')) {
                 $this->handleAdministration();
             }
         }
@@ -83,7 +81,7 @@ EOT;
         $config = array(
             'reminder' => (int) $pcf['reminder'],
             'l' => $pcf['cms_language'] ? $sl : false,
-            'test' => defined('XH_ADM') && XH_ADM && (bool) $pcf['test']
+            'test' => XH_ADM && (bool) $pcf['test']
         );
         $versions = $this->getBrowserVersions();
         if ($versions) {
@@ -111,18 +109,6 @@ EOT;
             }
         }
         return $versions;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isAdministrationRequested()
-    {
-        global $browserupdate;
-
-        return function_exists('XH_wantsPluginAdministration')
-            && XH_wantsPluginAdministration('browserupdate')
-            || isset($browserupdate) && $browserupdate == 'true';
     }
 
     protected function handleAdministration()
