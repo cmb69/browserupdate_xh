@@ -1,36 +1,28 @@
 <?php
 
 /**
- * The controllers.
+ * Copyright 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Browserupdate_XH.
  *
- * @category  CMSimple_XH
- * @package   Browserupdate
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Browserupdate_XH
+ * Browserupdate_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Browserupdate_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Browserupdate_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Browserupdate;
 
-/**
- * The controllers.
- *
- * @category CMSimple_XH
- * @package  Browserupdate
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Feedview_XH
- */
 class Controller
 {
-    /**
-     * Dispatches according to the request.
-     *
-     * @return void
-     */
     public function dispatch()
     {
         $this->emitScript();
@@ -44,14 +36,6 @@ class Controller
         }
     }
 
-    /**
-     * Writes the script element to $hjs resp. $bjs.
-     *
-     * @return void
-     *
-     * @global string (X)HTML fragment to insert in the head element.
-     * @global string (X)HTML fragment to insert at the bottom of the body element.
-     */
     protected function emitScript()
     {
         global $hjs, $bjs;
@@ -64,9 +48,7 @@ class Controller
     }
 
     /**
-     * Returns the script element.
-     *
-     * @return string (X)HTML.
+     * @return string
      */
     protected function renderScript()
     {
@@ -91,14 +73,7 @@ EOT;
     }
 
     /**
-     * Returns the JSON encoded script configuration.
-     *
      * @return string
-     *
-     * @global string The current language.
-     * @global array  The configuration of the plugins.     *
-     *
-     * @todo json_encode vs. XH_encodeJson
      */
     protected function getConfig()
     {
@@ -118,11 +93,7 @@ EOT;
     }
 
     /**
-     * Returns a map of out-dated browser versions.
-     *
      * @return array
-     *
-     * @global array The configuration of the plugins.
      */
     protected function getBrowserVersions()
     {
@@ -143,11 +114,7 @@ EOT;
     }
 
     /**
-     * Returns whether the plugin administration is requested.
-     *
      * @return bool
-     *
-     * @global string Whether the plugin's administration is requested.
      */
     protected function isAdministrationRequested()
     {
@@ -158,33 +125,22 @@ EOT;
             || isset($browserupdate) && $browserupdate == 'true';
     }
 
-    /**
-     * Handles the plugin administration.
-     *
-     * @return void
-     *
-     * @global string The value of the <var>admin</var> GP parameter.
-     * @global string The value of the <var>action</var> GP parameter.
-     * @global string (X)HTML fragment to insert in the contents area.
-     */
     protected function handleAdministration()
     {
         global $admin, $action, $o;
 
         $o .= print_plugin_admin('off');
         switch ($admin) {
-        case '':
-            $o .= $this->renderInfo();
-            break;
-        default:
-            $o .= plugin_admin_common($action, $admin, 'browserupdate');
+            case '':
+                $o .= $this->renderInfo();
+                break;
+            default:
+                $o .= plugin_admin_common($action, $admin, 'browserupdate');
         }
     }
 
     /**
-     * Returns the plugin info view.
-     *
-     * @return string (X)HTML.
+     * @return string
      */
     protected function renderInfo()
     {
@@ -195,12 +151,7 @@ EOT;
     }
 
     /**
-     * Renders the plugin icon.
-     *
-     * @return (X)HTML.
-     *
-     * @global array The paths of system files and folders.
-     * @global array The localization of the plugins.
+     * @return string
      */
     protected function renderIcon()
     {
@@ -214,9 +165,7 @@ EOT;
     }
 
     /**
-     * Renders the copyright info.
-     *
-     * @return (X)HTML.
+     * @return string
      */
     protected function renderCopyright()
     {
@@ -228,9 +177,7 @@ EOT;
     }
 
     /**
-     * Renders the license info.
-     *
-     * @return (X)HTML.
+     * @return string
      */
     protected function renderLicense()
     {
@@ -250,5 +197,3 @@ href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/
 EOT;
     }
 }
-
-?>

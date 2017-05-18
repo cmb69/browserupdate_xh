@@ -1,16 +1,22 @@
 <?php
 
 /**
- * Testing the general plugin administration.
+ * Copyright 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Browserupdate_XH.
  *
- * @category  Testing
- * @package   Browserupdate
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Browserupdate_XH
+ * Browserupdate_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Browserupdate_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Browserupdate_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Browserupdate;
@@ -23,26 +29,8 @@ require_once '../../cmsimple/functions.php';
 require_once '../../cmsimple/adminfuncs.php';
 require_once '../../cmsimple/classes/PluginMenu.php';
 
-/**
- * Testing the general plugin administration.
- *
- * @category Testing
- * @package  Browserupdate
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Browserupdate_XH
- */
 class AdministrationTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * Tests the stylesheet administration.
-     *
-     * @return void
-     *
-     * @global string Whether the plugin administration is requested.
-     * @global string The value of the <var>admin</var> GP parameter.
-     * @global string The value of the <var>action</var> GP parameter.
-     */
     public function testStylesheet()
     {
         global $browserupdate, $admin, $action;
@@ -52,29 +40,15 @@ class AdministrationTest extends PHPUnit_Framework_TestCase
         $admin = 'plugin_stylesheet';
         $action = 'plugin_text';
         $subject = new Controller();
-        new PHPUnit_Extensions_MockFunction(
-            'XH_registerStandardPluginMenuItems', $subject
-        );
-        $printPluginAdmin = new PHPUnit_Extensions_MockFunction(
-            'print_plugin_admin', $subject
-        );
+        new PHPUnit_Extensions_MockFunction('XH_registerStandardPluginMenuItems', $subject);
+        $printPluginAdmin = new PHPUnit_Extensions_MockFunction('print_plugin_admin', $subject);
         $printPluginAdmin->expects($this->once())->with('off');
-        $pluginAdminCommon = new PHPUnit_Extensions_MockFunction(
-            'plugin_admin_common', $subject
-        );
+        $pluginAdminCommon = new PHPUnit_Extensions_MockFunction('plugin_admin_common', $subject);
         $pluginAdminCommon->expects($this->once())
             ->with($action, $admin, 'browserupdate');
         $subject->dispatch();
     }
 
-    /**
-     * (Re)defines a constant.
-     *
-     * @param string $name  A name.
-     * @param string $value A value.
-     *
-     * @return void
-     */
     protected function defineConstant($name, $value)
     {
         if (!defined($name)) {
@@ -84,5 +58,3 @@ class AdministrationTest extends PHPUnit_Framework_TestCase
         }
     }
 }
-
-?>

@@ -1,24 +1,26 @@
 <?php
 
 /**
- * The autoloader.
+ * Copyright 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Browserupdate_XH.
  *
- * @category  CMSimple_XH
- * @package   Browserupdate
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2015-2017 Christoph M. Becker <http://3-magi.net/>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Browserupdate_XH
+ * Browserupdate_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Browserupdate_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Browserupdate_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
- * Autoloads the plugin classes.
- *
- * @param string $class A class name.
- *
- * @return void
+ * @param string $class
  */
 function Browserupdate_autoload($class)
 {
@@ -31,5 +33,3 @@ function Browserupdate_autoload($class)
 }
 
 spl_autoload_register('Browserupdate_autoload');
-
-?>
