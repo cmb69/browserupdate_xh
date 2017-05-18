@@ -144,56 +144,11 @@ EOT;
      */
     protected function renderInfo()
     {
-        return '<h1>Browserupdate</h1>'
-            . $this->renderIcon()
-            . '<p>Version: ' . BROWSERUPDATE_VERSION . '</p>'
-            . $this->renderCopyright() . $this->renderLicense();
-    }
+        global $pth;
 
-    /**
-     * @return string
-     */
-    protected function renderIcon()
-    {
-        global $pth, $plugin_tx;
-
-        return tag(
-            'img src="' . $pth['folder']['plugins']
-            . 'browserupdate/browserupdate.png" class="browserupdate_icon"'
-            . ' alt="' . $plugin_tx['browserupdate']['alt_icon'] . '"'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    protected function renderCopyright()
-    {
-        return <<<EOT
-<p>Copyright &copy; 2014-2017
-    <a href="http://3-magi.net/" target="_blank">Christoph M. Becker</a>
-</p>
-EOT;
-    }
-
-    /**
-     * @return string
-     */
-    protected function renderLicense()
-    {
-        return <<<EOT
-<p class="browserupdate_license">This program is free software: you can
-redistribute it and/or modify it under the terms of the GNU General Public
-License as published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.</p>
-<p class="browserupdate_license">This program is distributed in the hope that it
-will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHAN&shy;TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-Public License for more details.</p>
-<p class="browserupdate_license">You should have received a copy of the GNU
-General Public License along with this program. If not, see <a
-href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/</a>.
-</p>
-EOT;
+        $view = new View('info');
+        $view->logo = "{$pth['folder']['plugins']}browserupdate/browserupdate.png";
+        $view->version = BROWSERUPDATE_VERSION;
+        return (string) $view;
     }
 }
