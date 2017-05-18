@@ -24,11 +24,6 @@ namespace Browserupdate;
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Extensions_MockFunction;
 
-require_once './vendor/autoload.php';
-require_once '../../cmsimple/functions.php';
-require_once '../../cmsimple/adminfuncs.php';
-require_once '../../cmsimple/classes/PluginMenu.php';
-
 class AdministrationTest extends PHPUnit_Framework_TestCase
 {
     public function testStylesheet()
