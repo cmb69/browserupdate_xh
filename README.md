@@ -4,6 +4,8 @@ Browserupdate_XH – a CMSimple_XH plugin
 [![beta: 1.0beta1](https://img.shields.io/badge/beta-1.0beta1-red.svg)](https://github.com/cmb69/browserupdate_xh/releases/tag/1.0beta1)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
+**Development and maintainance of this plugin have been ceased, and it's looking for [a new maintainer](https://github.com/cmb69/browserupdate_xh/issues/2).**
+
 Copyright © 2014-2017 Christoph M. Becker
 
 Browserupdate_XH is free software: you can redistribute it and/or modify
